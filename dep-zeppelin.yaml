@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zeppelin-spark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zeppelin-spark
+  template:
+    metadata:
+      labels:
+        app: zeppelin-spark
+    spec:
+      containers:
+      - name: zeppelin-spark
+        image: 373.dkr.ecr.us-east-1.amazonaws.com/zeppelin:0.0.5
+        # command: [ "/bin/bash", "-c", "--" ]
+        # args: [ "while true; do sleep 30; done;" ]
+        resources:
+          limits:
+            memory: "2Gi"
+          requests:
+            memory: "1Gi"
+        # volumeMounts:
+        # - mountPath: "/media"
+        #   name: test-volume
+        ports:
+        - containerPort: 80
+      # volumes:
+      # - name: test-volume
+      #   persistentVolumeClaim:
+      #     claimName: test-volume
